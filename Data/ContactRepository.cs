@@ -46,5 +46,57 @@ namespace ContactManager.Data
         {
             _context.Add(entity);
         }
-    }
+
+		//
+		public Client Create(Client client)
+		{
+			_context.Clients.Add(client);
+			_context.SaveChanges();
+			
+			return client;
+		}
+
+		public Client Edit(int id)
+		{
+			var client = _context.Clients.FirstOrDefault(c => c.Id == id);
+
+			if (client == null)
+				return null;
+
+			return client;
+		}
+
+
+		public Client Edit(Client client)
+		{
+			_context.Clients.Update(client);
+			_context.SaveChanges();
+			
+			return client;
+		}
+
+
+		public Client Delete(int id)
+		{
+			var client = _context.Clients.FirstOrDefault(c => c.Id == id);
+
+			if (client == null)
+				return null;
+
+			return client;
+		}
+
+		public Client Destroy(int id)
+		{
+			var client = _context.Clients.FirstOrDefault(c => c.Id == id);
+
+			if (client == null)
+				return null;
+
+			_context.Clients.Remove(client);
+			_context.SaveChangesAsync();
+
+			return client;
+		}
+	}
 }
