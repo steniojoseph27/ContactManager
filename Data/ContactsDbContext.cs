@@ -1,5 +1,6 @@
 ﻿using ContactManager.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,22 @@ namespace ContactManager.Data
 {
     public class ContactsDbContext : DbContext
     {
+        private readonly IConfiguration _config;
+
+        public ContactsDbContext(IConfiguration config)
+        {
+            _config = config;
+        }
+
         public DbSet<Client> Clients { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
-        public ContactsDbContext(DbContextOptions<ContactsDbContext> options) : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-
+            base.OnConfiguring(builder);
+            builder.UseSqlServer(_config.GetConnectionString("ContactManagerConnectionString"));
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Client>()

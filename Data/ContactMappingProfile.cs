@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ContactManager.Data.Entities;
-using ContactManager.ViewModel;
+using ContactManager.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

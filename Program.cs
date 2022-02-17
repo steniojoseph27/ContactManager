@@ -18,9 +18,16 @@ namespace ContactManager
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(SetupConfiguration)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void SetupConfiguration(HostBuilderContext context, IConfigurationBuilder builder)
+        {
+            builder.AddJsonFile("appsettings.json", false, true)
+                .AddEnvironmentVariables();
+        }
     }
 }
