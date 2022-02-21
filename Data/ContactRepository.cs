@@ -46,5 +46,5 @@ namespace ContactManager.Data
         {
             _context.Add(entity);
         }
-    }
+	}
 }
